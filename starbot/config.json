@@ -1,0 +1,19 @@
+{
+  "urls": {
+    "base_url": "http://www.sample.com:8080",
+    "get_token": "/api/token/get",
+    "refresh_token": "/token/refresh",
+    "api_auth": "/api/auth",
+    "api_likes": "/api/events/like/post",
+    "api_posts": "/api/posts"
+  },
+  "defined_messages": [
+    "I'm not happy because of Starnavi not employed me yet. Sad mood :(.",
+    "Simple is better than complex!",
+    "When I'm going to vacation, I usually calling myself 'Django Unchained' (like a Quentin Tarantino's movie tittle)",
+    "Mazel tov! It works!"
+  ],
+  "number_of_users": 10,
+  "max_posts_per_user": 2,
+  "max_likes_per_user": 10
+}

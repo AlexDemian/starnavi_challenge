@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+
+    #VuePostsApp {
+        width: 70%;
+        margin-left: 15%;
+        padding-bottom: 100px;
+    }
+
+    .post-container {
+        background-color: white;
+        margin-top: 50px;
+        border-radius: 5px;
+        padding: 10px;
+    }
+
+    .post-head {
+        background-color: steelblue;
+        color: white;
+        border-radius: 3px;
+        padding: 3px;
+        width: 30%;
+        margin-bottom: 10px;
+    }
+
+</style>
+
+<div id="VuePostsApp">
+    <div class="post-container">
+        <h1 align="center">StarPosts</h1>
+    </div>
+    <div v-for="post in posts" class="post-container">
+        <div class="post-head">
+            <div>[[ post.username ]] posted at [[ post.created_at ]]</div>
+        </div>
+        <div style="margin-left: 20px;">
+            <div>[[ post.body ]]</div>
+        </div>
+        <hr>
+        <div align="right">
+            <button type="button" class="fa fa-heart btn btn-danger btn-sm">[[ post.total_likes ]]</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    app = new Vue({
+        el: '#VuePostsApp',
+        data: {
+            posts: []
+        },
+
+        methods: {
+            get_posts: function () {
+                axios.get('/api/posts').then(
+                    response => this.posts = response.data
+                )
+            }
+        },
+
+        mounted: function () {
+            this.get_posts();
+        }
+    });
+
+</script>
+
+
+{% endblock %}

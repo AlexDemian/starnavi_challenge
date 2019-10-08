@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    env_file:
+      - ./postgres/user.env
+
+
+  starbook:
+    build: .
+    command: bash -c "python manage.py migrate && python manage.py runserver 0.0.0.0:8001"
+    volumes:
+     - ./starbook:/starbook
+
+    depends_on:
+      - db
+
+    env_file:
+      - ./postgres/user.env
+      - ./starbook/starbook.env
+
+  nginx:
+    image: nginx:latest
+    restart: always
+
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./nginx/logs:/var/log/nginx
+
+    ports:
+      - 8080:80
+
+    depends_on:
+      - starbook
+
